@@ -31,9 +31,6 @@ pub fn trainer_and_plotter()->Result<(),Box<dyn Error>>{
     plot2.add_trace(res_points);
     
     println!("{}", betas);
-    plot.show();
-    plot2.show();
-    
     let pred_v_real = Scatter::new(ydata2.matrix.elements.clone(), predicted.matrix.elements.clone()).name("Points").mode(plotly::common::Mode::Markers);
     let mut plot3 = Plot::new();
     plot3.add_trace(pred_v_real);
@@ -78,7 +75,6 @@ pub fn ft_linear_regression(
     let ones = Vector::<f64>::ones(x.size())?;
     let (exes, ncoefs) = exes.normalize_cols()?;
     let exes = exes.append_horizontal(&ones.matrix())?;
-    println! {"exes {}", exes};
     let nobs = x.size();
     let (y, m_y, sd_y) = y.normalize_vec()?;
     let alpha = 0.01 / ((2 * nobs) as f64);
